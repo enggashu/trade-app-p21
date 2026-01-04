@@ -12,6 +12,7 @@ export default function Navigation() {
     { label: 'Market Gap', href: '/market-gap' },
     { label: 'Approach', href: '/approach' },
     { label: 'Focused Sectors', href: '/sectors' },
+    { label: 'Companies', href: '/companies' },
   ]
 
   return (
