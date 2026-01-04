@@ -2,9 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from "next/navigation"
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname();
 
   const navItems = [
     { label: 'Team', href: '/team' },
@@ -13,6 +15,7 @@ export default function Navigation() {
     { label: 'Approach', href: '/approach' },
     { label: 'Focused Sectors', href: '/sectors' },
     { label: 'Companies', href: '/companies' },
+    { label: 'Contact Us', href: '/contactUs' },
   ]
 
   return (
@@ -27,18 +30,19 @@ export default function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {navItems.map((item) => {
+              const isActive = pathname === item.href + '/';
+              return (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors"
+                className={`text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors 
+                  ${isActive ? "text-blue-600 " : ""}`}
               >
                 {item.label}
               </Link>
-            ))}
-            <button className="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700 transition-colors shadow-sm">
-              Connect
-            </button>
+            )})}
+           
           </div>
 
           {/* Mobile menu button */}
@@ -86,9 +90,7 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
-            <button className="w-full px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700 shadow-sm">
-              Connect
-            </button>
+           
           </div>
         )}
       </div>
